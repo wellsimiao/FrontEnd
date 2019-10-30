@@ -1,0 +1,133 @@
+<div class="container">
+  <header class="header clearfix">
+    <h3 class="text-muted">Agenda de conato</h3>
+  </header>
+  <main role="main">
+    <div class="jumbotron">
+      <h3 class="display-3" *ngIf="contatoIdToUpdate; else create">
+        Atualizar Contato de Id: {{ contatoIdToUpdate }}
+      </h3>
+      <ng-template #create>
+        <h3 class="display-3">Novo Contato</h3>
+      </ng-template>
+      <br />
+      <div>
+        <form
+          class="form-horizontal"
+          [formGroup]="contatoForm"
+          (ngSubmit)="onContatoFormSubmit()"
+        >
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input id="nome" class="form-control" formControlName="nome" />
+            <small
+              class="text-danger"
+              *ngIf="contatoForm.get('nome').invalid && processValidation"
+            >
+              Nome é obrigatório.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="numero">Número</label>
+            <input id="numero" class="form-control" formControlName="numero" />
+            <small
+              class="text-danger"
+              *ngIf="contatoForm.get('numero').invalid && processValidation"
+            >
+              Número é obrigatório.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+            />
+            <small
+              class="text-danger"
+              *ngIf="contatoForm.get('email').invalid && processValidation"
+            >
+              E-mail é obrigatório.
+            </small>
+          </div>
+          <button class="btn btn-primary" *ngIf="!contatoIdToUpdate">
+            Adicionar
+          </button>
+          <button class="btn btn-primary" *ngIf="contatoIdToUpdate">
+            Editar
+          </button>
+          <button
+            class="btn btn-info"
+            (click)="backToCreateContato()"
+            *ngIf="contatoIdToUpdate"
+          >
+            Voltar
+          </button>
+        </form>
+        <br />
+        <div *ngIf="statusCode; else processing">
+          <div class="alert alert-success" *ngIf="statusCode === 201">
+            <p>Contato adicionado com sucesso.</p>
+          </div>
+          <div class="alert alert-warning" *ngIf="statusCode === 409">
+            <p>Contato já existe.</p>
+          </div>
+          <div class="alert alert-success" *ngIf="statusCode === 200">
+            <p>Contato atualizado com sucesso.</p>
+          </div>
+          <div class="alert alert-success" *ngIf="statusCode === 204">
+            <p>Contato deletado com sucesso.</p>
+          </div>
+          <div
+            class="alert alert-danger"
+            *ngIf="statusCode === 500"
+            [ngClass]="'error'"
+          >
+            <p>Internal Server Error.</p>
+          </div>
+        </div>
+        <ng-template #processing>
+          <img *ngIf="requestProcessing" src="assets/images/loading.gif" />
+        </ng-template>
+      </div>
+    </div>
+    <h3>Contatos</h3>
+    <table class="table table-striped table-hover">
+      <tr>
+        <th class="text-center">Id</th>
+        <th class="text-center">Nome</th>
+        <th class="text-center">Telefone</th>
+        <th class="text-center">Email</th>
+        <th colspan="2" class="text-center">Opções</th>
+      </tr>
+      <tr *ngFor="let contato of allContatos">
+        <td class="text-center">{{ contato.id }}</td>
+        <td class="text-center">{{ contato.nome }}</td>
+        <td class="text-center">{{ contato.telefone }}</td>
+        <td class="text-center">{{ contato.email }}</td>
+        <td class="text-center">
+          <div class="btn-group">
+            <button
+              class="btn btn-warning"
+              type="button"
+              (click)="loadContatoToEdit(contato.contatoId)"
+            >
+              Atualizar
+            </button>
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="deleteContato(contato.contatoId)"
+            >
+              Deletar
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </main>
+
+  <footer class="footer"></footer>
+</div>
