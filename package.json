@@ -26,7 +26,7 @@
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
     "jominute-module": "^1.1.2",
-    "jquery": "^2.2.4",
+    "jquery": "^3.4.0",
     "materialize-css": "^0.100.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
