@@ -7,7 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contato',
-  templateUrl: '../contato.component.html',
+  templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css']
 })
 
@@ -69,9 +69,9 @@ export class ContatoComponent implements OnInit {
     }
   }
   // Load contato by id to edit
-  loadContatoToEdit(contatoId: string) {
+  loadContatoToEdit(id: string) {
     this.preProcessConfigurations();
-    this.contatoService.getContatoById(contatoId)
+    this.contatoService.getContatoById(id)
       .subscribe(contato => {
         this.contatoIdToUpdate = contato.contatoId;
         this.contatoForm.setValue({ nome: contato.nome, telefone: contato.telefone, email: contato.email });
