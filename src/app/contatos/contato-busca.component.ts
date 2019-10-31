@@ -2,18 +2,22 @@ import { ContatoService } from './contato.service';
 import { Contato } from './contato.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
+import { from } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
-    moduleId: 'module.id',
+    moduleId: module.id,
     // tslint:disable-next-line: component-selector
     selector: 'contato-buscar',
     templateUrl: 'contato-buscar.component.html',
 })
 export class ContatoBuscaComponent implements OnInit {
 
-    contatos: Observable<Contato[]>;
+    // tslint:disable-next-line: semicolon
+    contatos: Observable<Contato[]>
     private termosBusca: Subject<string> = new Subject<string>();
 
     constructor(

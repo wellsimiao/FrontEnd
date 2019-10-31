@@ -10,10 +10,10 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ContatoService {
 
-    // tslint:disable-next-line: no-inferrable-types
-    private apiUrl: string = 'app/contatos';
+    private apiUrl = 'app/contatos';
     // tslint:disable-next-line: deprecation
     private headers: Headers = new Headers({'Content-type': 'application/json'});
+  search: any;
 
     constructor(
         // tslint:disable-next-line: deprecation
