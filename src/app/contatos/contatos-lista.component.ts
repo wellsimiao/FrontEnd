@@ -5,7 +5,7 @@ import { ContatoService } from './contato.service';
 import { DialogSerivce } from '../dialog.service';
 
 @Component({
-    moduleId: module.id,
+    moduleId: 'module.id',
     // tslint:disable-next-line: component-selector
     selector: 'contatos-lista',
     templateUrl: 'contatos-lista.component.html'

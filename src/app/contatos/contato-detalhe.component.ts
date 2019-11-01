@@ -5,9 +5,9 @@ import { Location } from '@angular/common';
 import { ContatoService } from './contato.service';
 import { Contato } from './contato.model';
 
+
 @Component({
-    moduleId: module.id,
-    // tslint:disable-next-line: component-selector
+// tslint:disable-next-line: component-selector
     selector: 'contato-detalhes',
     templateUrl: 'contato-detalhe.component.html'
 })

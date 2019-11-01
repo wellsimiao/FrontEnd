@@ -9,7 +9,7 @@ import { from } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
-    moduleId: module.id,
+
     // tslint:disable-next-line: component-selector
     selector: 'contato-buscar',
     templateUrl: 'contato-buscar.component.html',
@@ -24,17 +24,14 @@ export class ContatoBuscaComponent implements OnInit {
        private contatoService: ContatoService,
        private router: Router
     ) {}
-
     ngOnInit() {
       this.contatos = this.termosBusca
           .debounceTime(500)
           .distinctUntilChanged()
           .switchMap(term => {
               console.log('Fez a busca: ' + term);
-              return term ? this.contatoService.search(term) : Observable.of<Contato[]>([]);
           }).catch(err => {
               console.log(err);
-              return Observable.of<Contato[]>([]);
           });
 
   }
